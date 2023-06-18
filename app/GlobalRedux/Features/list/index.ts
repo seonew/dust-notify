@@ -2,17 +2,18 @@
 
 import { createSlice } from "@reduxjs/toolkit";
 
-type itemState = {
+export type ItemState = {
   sidoName: string;
   stationName: string;
   pm10Grade: string;
   pm10Value: string;
   dataTime: string;
+  isFavorite: boolean;
 };
 
 export interface ListState {
   total: number;
-  items: itemState[];
+  items: ItemState[];
 }
 
 const initialState: ListState = {
@@ -28,8 +29,11 @@ export const listSlice = createSlice({
       state.items = action.payload.list;
       state.total = action.payload.total;
     },
+    updateFavorite: (state, action) => {
+      state.items = action.payload;
+    },
   },
 });
 
-export const { update } = listSlice.actions;
+export const { update, updateFavorite } = listSlice.actions;
 export default listSlice.reducer;

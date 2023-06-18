@@ -24,7 +24,7 @@ export const getBackgroundColor = (item: string) => {
   return result;
 };
 
-export const getTextColor = (item: string) => {
+export const getColorText = (item: string) => {
   let result = "";
   switch (item) {
     case "1":
@@ -50,7 +50,21 @@ export const getTextColor = (item: string) => {
   return result;
 };
 
-export const getTextGrade = (item: string) => {
+export const getBasicColorText = (item: string) => {
+  let result = "";
+  switch (item) {
+    case null:
+      result = "text-black";
+      break;
+    default:
+      result = "text-white";
+      break;
+  }
+
+  return result;
+};
+
+export const getGradeText = (item: string) => {
   let result = "";
   switch (item) {
     case "1":
@@ -75,3 +89,23 @@ export const getTextGrade = (item: string) => {
 
   return result;
 };
+
+export const area = [
+  "서울",
+  "부산",
+  "대구",
+  "인천",
+  "광주",
+  "대전",
+  "울산",
+  "경기",
+  "강원",
+  "충북",
+  "충남",
+  "전북",
+  "전남",
+  "경북",
+  "경남",
+  "제주",
+  "세종",
+];
