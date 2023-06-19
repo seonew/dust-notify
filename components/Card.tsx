@@ -1,26 +1,35 @@
-import { ItemState, updateFavorite } from "@/app/GlobalRedux/Features/list";
 import {
-  getBackgroundColor,
-  getBasicColorText,
-  getColorText,
-  getGradeText,
-} from "@/utils/common";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/app/GlobalRedux/store";
+  ItemState,
+  addIsFavoriteToItem,
+} from "@/app/GlobalRedux/Features/list";
+import { useDispatch } from "react-redux";
 import Favorite from "./Favorite";
-import { FavoriteState, update } from "@/app/GlobalRedux/Features/favorite";
+import {
+  addFavorite,
+  deleteFavorite,
+} from "@/app/GlobalRedux/Features/favorite";
 
 type Props = {
   item: ItemState;
 };
 
 const Card = ({ item }: Props) => {
-  const list = useSelector((state: RootState) => state.list.items);
-  const favorites = useSelector((state: RootState) => state.favorite.items);
   const dispatch = useDispatch();
 
   const handleClickItem = (checked) => {
-    console.log(`Card handleClickItem: ${checked} `);
+    if (checked) {
+      const nextItem = { ...item, isFavorite: checked };
+      dispatch(addFavorite(nextItem));
+    } else {
+      dispatch(deleteFavorite(item.stationName));
+    }
+
+    dispatch(
+      addIsFavoriteToItem({
+        stationName: item.stationName,
+        isFavorite: checked,
+      })
+    );
   };
 
   return (
@@ -46,11 +55,7 @@ const Card = ({ item }: Props) => {
         </span>
       </div>
       <div className="p-1 text-xs">
-        {item.pm10Value ? (
-          <p>미세먼지 수치: {item.pm10Value}</p>
-        ) : (
-          <p>데이터를 일시적으로 불러올 수 없음</p>
-        )}
+        <p>미세먼지 수치: {item.pm10Value ?? "-"}</p>
         {item.dataTime ? <p>({item.dataTime} 기준)</p> : ""}
       </div>
     </div>
@@ -58,3 +63,95 @@ const Card = ({ item }: Props) => {
 };
 
 export default Card;
+
+const getBackgroundColor = (item: string) => {
+  let result = "";
+  switch (item) {
+    case "1":
+      result = "bg-blue-400";
+      break;
+    case "2":
+      result = "bg-yellow-400";
+      break;
+    case "3":
+      result = "bg-orange-400";
+      break;
+    case "4":
+      result = "bg-red-500";
+      break;
+    case "5":
+      result = "bg-black";
+      break;
+    default:
+      result = "bg-white";
+      break;
+  }
+
+  return result;
+};
+
+const getColorText = (item: string) => {
+  let result = "";
+  switch (item) {
+    case "1":
+      result = "text-blue-400";
+      break;
+    case "2":
+      result = "text-yellow-400";
+      break;
+    case "3":
+      result = "text-orange-400";
+      break;
+    case "4":
+      result = "text-red-500";
+      break;
+    case "5":
+      result = "text-black";
+      break;
+    default:
+      result = "text-black";
+      break;
+  }
+
+  return result;
+};
+
+const getBasicColorText = (item: string) => {
+  let result = "";
+  switch (item) {
+    case null:
+      result = "text-black";
+      break;
+    default:
+      result = "text-white";
+      break;
+  }
+
+  return result;
+};
+
+const getGradeText = (item: string) => {
+  let result = "";
+  switch (item) {
+    case "1":
+      result = "좋음";
+      break;
+    case "2":
+      result = "보통";
+      break;
+    case "3":
+      result = "한 때 나쁨";
+      break;
+    case "4":
+      result = "나쁨";
+      break;
+    case "5":
+      result = "매우 나쁨";
+      break;
+    default:
+      result = "알 수 없음";
+      break;
+  }
+
+  return result;
+};

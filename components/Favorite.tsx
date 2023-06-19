@@ -2,7 +2,7 @@ import { StarIcon } from "@heroicons/react/24/outline";
 import { StarIcon as CheckedStarIcon } from "@heroicons/react/24/solid";
 
 type Props = {
-  checked: boolean;
+  checked?: boolean;
   onClick: (item: boolean) => void;
 };
 

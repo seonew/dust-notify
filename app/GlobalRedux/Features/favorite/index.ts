@@ -23,11 +23,17 @@ export const favoriteSlice = createSlice({
   name: "favorite",
   initialState,
   reducers: {
-    update: (state, action) => {
-      state.items = action.payload;
+    addFavorite: (state, action) => {
+      state.items.push(action.payload);
+    },
+    deleteFavorite: (state, action) => {
+      const nextItems = state.items.filter(
+        (favorite) => favorite.stationName !== action.payload
+      );
+      state.items = nextItems;
     },
   },
 });
 
-export const { update } = favoriteSlice.actions;
+export const { addFavorite, deleteFavorite } = favoriteSlice.actions;
 export default favoriteSlice.reducer;

@@ -8,7 +8,7 @@ export type ItemState = {
   pm10Grade: string;
   pm10Value: string;
   dataTime: string;
-  isFavorite: boolean;
+  isFavorite?: boolean;
 };
 
 export interface ListState {
@@ -29,11 +29,18 @@ export const listSlice = createSlice({
       state.items = action.payload.list;
       state.total = action.payload.total;
     },
-    updateFavorite: (state, action) => {
-      state.items = action.payload;
+    addIsFavoriteToItem: (state, action) => {
+      const { stationName, isFavorite } = action.payload;
+      const foundItem = state.items.find(
+        (item) => item.stationName === stationName
+      );
+
+      if (foundItem) {
+        foundItem.isFavorite = isFavorite;
+      }
     },
   },
 });
 
-export const { update, updateFavorite } = listSlice.actions;
+export const { update, addIsFavoriteToItem } = listSlice.actions;
 export default listSlice.reducer;
