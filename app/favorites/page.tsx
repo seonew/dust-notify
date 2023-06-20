@@ -3,7 +3,6 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../GlobalRedux/store";
 import Card from "@/components/Card";
-import BottomTabs from "@/components/BottomTabs";
 
 export default function Favorites() {
   const list = useSelector((state: RootState) => state.favorite.items);
@@ -20,7 +19,6 @@ export default function Favorites() {
             );
           })}
       </div>
-      <BottomTabs />
     </main>
   );
 }

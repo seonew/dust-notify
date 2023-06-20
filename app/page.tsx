@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 import { update } from "./GlobalRedux/Features/list";
 import { area } from "@/utils/common";
 import Card from "@/components/Card";
-import BottomTabs from "@/components/BottomTabs";
 
 export default function Home() {
   const list = useSelector((state: RootState) => state.list.items);
@@ -47,7 +46,6 @@ export default function Home() {
             );
           })}
       </div>
-      <BottomTabs />
     </main>
   );
 }
