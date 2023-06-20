@@ -15,28 +15,37 @@ const BottomTabs = () => {
   };
 
   return (
-    <div className="flex items-center justify-between h-16 text-sm sticky bottom-0 z-50 bg-white divide-x shadow-lg">
-      <div className={`${tabCSS}`} onClick={handleClickItem("1")}>
-        <Link href="/" className={`${active === "1" ? activeCSS : ""}`}>
+    <div className="flex items-center justify-between h-16 text-sm sticky bottom-0 z-50 bg-white divide-x shadow-2xl">
+      <Link
+        href="/"
+        className={`${tabCSS} ${active === "1" ? activeCSS : ""}`}
+        onClick={handleClickItem("1")}
+      >
+        <div>
           <MapPinIcon className={`${iconCSS}`} />
-          <span>기본 지역</span>
-        </Link>
-      </div>
-      <div className={`${tabCSS}`} onClick={handleClickItem("2")}>
-        <Link href="/" className={`${active === "2" ? activeCSS : ""}`}>
+          <span>나의 지역</span>
+        </div>
+      </Link>
+      <Link
+        href="/"
+        className={`${tabCSS} ${active === "2" ? activeCSS : ""}`}
+        onClick={handleClickItem("2")}
+      >
+        <div>
           <MapIcon className={`${iconCSS}`} />
           <span>전체 지역</span>
-        </Link>
-      </div>
-      <div className={`${tabCSS}`} onClick={handleClickItem("3")}>
-        <Link
-          href="/favorites"
-          className={`${active === "3" ? activeCSS : ""}`}
-        >
+        </div>
+      </Link>
+      <Link
+        href="/favorites"
+        className={`${tabCSS} ${active === "3" ? activeCSS : ""}`}
+        onClick={handleClickItem("3")}
+      >
+        <div>
           <StarIcon className={`${iconCSS}`} />
           <span>즐겨찾기</span>
-        </Link>
-      </div>
+        </div>
+      </Link>
     </div>
   );
 };
