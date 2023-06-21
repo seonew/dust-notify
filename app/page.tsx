@@ -13,6 +13,7 @@ export default function Home() {
   const dispatch = useDispatch();
   const [sidoName, setSidoName] = useState("서울");
   const data = useData(sidoName);
+  const fixedCSS = "fixed top-0 left-0 right-0 bottom-16 overflow-auto";
 
   const handleChangeItem = (e) => {
     setSidoName(e.target.value);
@@ -26,26 +27,28 @@ export default function Home() {
   }, [data, dispatch, list]);
 
   return (
-    <main className="flex min-h-screen flex-col justify-center">
-      <div className="p-2 flex items-center justify-center">
-        <select onChange={handleChangeItem}>
-          {area.map((item, index) => (
-            <option key={index} value={item}>
-              {item}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div className="flex flex-col items-center">
-        {list &&
-          list?.map((item, index) => {
-            return (
-              <div key={index}>
-                <Card item={item} />
-              </div>
-            );
-          })}
-      </div>
-    </main>
+    <div className={`${fixedCSS}`}>
+      <main className={`flex min-h-screen flex-col justify-center`}>
+        <div className="p-2 flex items-center justify-center">
+          <select onChange={handleChangeItem}>
+            {area.map((item, index) => (
+              <option key={index} value={item}>
+                {item}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="flex flex-col items-center">
+          {list &&
+            list?.map((item, index) => {
+              return (
+                <div key={index}>
+                  <Card item={item} />
+                </div>
+              );
+            })}
+        </div>
+      </main>
+    </div>
   );
 }

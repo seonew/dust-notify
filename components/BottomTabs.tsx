@@ -9,13 +9,16 @@ const BottomTabs = () => {
   const iconCSS = "w-5 h-5 m-auto";
   const activeCSS = "text-green-500 font-semibold";
   const [active, setActive] = useState("1");
+  const fixedCSS = "fixed w-full left-0";
 
   const handleClickItem = (current) => () => {
     setActive(current);
   };
 
   return (
-    <div className="flex items-center justify-between h-16 text-sm sticky bottom-0 z-50 bg-white divide-x shadow-2xl">
+    <div
+      className={`${fixedCSS} flex items-center justify-between h-16 text-sm bottom-0 z-50 bg-white divide-x shadow-2xl`}
+    >
       <Link
         href="/"
         className={`${tabCSS} ${active === "1" ? activeCSS : ""}`}
