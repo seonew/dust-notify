@@ -3,6 +3,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export type ItemState = {
+  id: string;
   sidoName: string;
   stationName: string;
   pm10Grade: string;
@@ -14,17 +15,22 @@ export type ItemState = {
 export interface ListState {
   total: number;
   items: ItemState[];
+  sidoName: string;
 }
 
 const initialState: ListState = {
   total: 0,
   items: [],
+  sidoName: "서울",
 };
 
 export const listSlice = createSlice({
   name: "list",
   initialState,
   reducers: {
+    setSidoName: (state, action) => {
+      state.sidoName = action.payload;
+    },
     update: (state, action) => {
       state.items = action.payload.list;
       state.total = action.payload.total;
@@ -42,5 +48,5 @@ export const listSlice = createSlice({
   },
 });
 
-export const { update, addIsFavoriteToItem } = listSlice.actions;
+export const { update, addIsFavoriteToItem, setSidoName } = listSlice.actions;
 export default listSlice.reducer;
