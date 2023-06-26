@@ -8,7 +8,7 @@ export type FavoriteState = {
   pm10Grade: string;
   pm10Value: string;
   dataTime: string;
-  isFavorite: boolean;
+  isFavorite?: boolean;
 };
 
 export interface FavoritesState {

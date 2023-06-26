@@ -6,8 +6,6 @@ export async function GET(request: Request, context: { params }) {
   const { sidoName } = context.params;
 
   const getParameters = {
-    serviceKey:
-      "aCuXoZMJoFs8YKFVy35S1WW32EyEJu7FWjfE1PMS2vwI5o8IM%2BInndTI%2FZWdoNBxmClnp7Sh5W6AQf%2BMdTzYtg%3D%3D",
     returnType: "json",
     numOfRows: "100",
     pageNo: "1",
@@ -15,13 +13,27 @@ export async function GET(request: Request, context: { params }) {
     ver: "1.0",
   };
 
-  const result = await fetch(
-    `https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty?serviceKey=${getParameters["serviceKey"]}&returnType=${getParameters["returnType"]}&numOfRows=${getParameters["numOfRows"]}&pageNo=${getParameters["pageNo"]}&sidoName=${getParameters["sidoName"]}&ver=${getParameters["ver"]}`
-  )
-    .then((response) => response.json())
-    .then((data) => {
-      return data.response.body;
-    });
+  const url = new URL(
+    "https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty"
+  );
+  const searchParams = new URLSearchParams(getParameters);
+  searchParams.append("serviceKey", SERVICE_KEY!);
+  url.search = searchParams.toString();
 
-  return NextResponse.json(result);
+  try {
+    const result = await fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        return data.response.body;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    return NextResponse.json(result);
+  } catch (error) {
+    console.log(error);
+  }
+
+  return NextResponse.json(null);
 }

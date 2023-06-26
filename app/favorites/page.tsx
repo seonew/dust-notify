@@ -2,7 +2,7 @@
 
 import { useSelector } from "react-redux";
 import { RootState } from "../GlobalRedux/store";
-import Card from "@/components/Card";
+import CardList from "@/components/CardList";
 
 export default function Favorites() {
   const list = useSelector((state: RootState) => state.favorite.items);
@@ -12,22 +12,14 @@ export default function Favorites() {
   return (
     <div className={`${fixedCSS}`}>
       <main className={`${flexCSS} w-screen`}>
-        {!list || list.length === 0 ? (
-          <div className={`${flexCSS} items-center`}>
-            <p className="m-auto">즐겨찾기 지역을 추가해 주세요. 😊</p>
-          </div>
-        ) : (
-          <div className={`${flexCSS} items-center overflow-y-auto`}>
-            {list &&
-              list?.map((item, index) => {
-                return (
-                  <div key={index}>
-                    <Card item={item} />
-                  </div>
-                );
-              })}
-          </div>
-        )}
+        <div className={`${flexCSS} items-center overflow-y-auto`}>
+          <CardList
+            list={list}
+            emptyNode={
+              <p className="m-auto">즐겨찾기 지역을 추가해 주세요. 😊</p>
+            }
+          />
+        </div>
       </main>
     </div>
   );

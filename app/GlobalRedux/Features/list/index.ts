@@ -3,7 +3,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export type ItemState = {
-  id: string;
   sidoName: string;
   stationName: string;
   pm10Grade: string;
