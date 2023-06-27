@@ -3,7 +3,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./GlobalRedux/store";
 import { setSidoName, update } from "./GlobalRedux/Features/list";
-import { area } from "@/utils/common";
+import { SIDO_NAMES } from "@/utils/common";
 import CardList from "@/components/CardList";
 import useData from "./hooks/use-data";
 import { useEffect } from "react";
@@ -36,7 +36,7 @@ export default function Home() {
           <>
             <div className="p-2 flex items-center justify-center">
               <select onChange={handleChangeItem} value={sidoName}>
-                {area.map((item, index) => (
+                {SIDO_NAMES.map((item, index) => (
                   <option key={index} value={item}>
                     {item}
                   </option>
