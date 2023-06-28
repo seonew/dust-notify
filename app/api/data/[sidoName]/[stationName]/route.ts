@@ -1,11 +1,13 @@
+import { objectToQueryString } from "@/utils/common";
 import { NextResponse } from "next/server";
+
+const { SERVICE_KEY } = process.env;
 
 export async function GET(request: Request, context: { params }) {
   const { stationName } = context.params;
 
-  const getParameters = {
-    serviceKey:
-      "aCuXoZMJoFs8YKFVy35S1WW32EyEJu7FWjfE1PMS2vwI5o8IM%2BInndTI%2FZWdoNBxmClnp7Sh5W6AQf%2BMdTzYtg%3D%3D",
+  const params = {
+    serviceKey: SERVICE_KEY,
     returnType: "json",
     numOfRows: "1",
     pageNo: "1",
@@ -14,10 +16,12 @@ export async function GET(request: Request, context: { params }) {
     ver: "1.0",
   };
 
+  const url = `https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?${objectToQueryString(
+    params
+  )}`;
+
   try {
-    const result = await fetch(
-      `https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?serviceKey=${getParameters["serviceKey"]}&returnType=${getParameters["returnType"]}&numOfRows=${getParameters["numOfRows"]}&pageNo=${getParameters["pageNo"]}&stationName=${getParameters["stationName"]}&dataTerm=${getParameters["dataTerm"]}&ver=${getParameters["ver"]}`
-    )
+    const result = await fetch(url)
       .then((response) => response.json())
       .then((data) => {
         return data.response.body;

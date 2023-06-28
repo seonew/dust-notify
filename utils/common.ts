@@ -1,3 +1,16 @@
+export const objectToQueryString = (params) => {
+  const queryStrings = Object.keys(params).map((key) => {
+    const value = params[key];
+
+    if (key === "serviceKey") {
+      return `${encodeURIComponent(key)}=${value}`;
+    }
+    return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
+  });
+
+  return queryStrings.join("&");
+};
+
 export const getBackgroundColor = (item: string) => {
   let result = "";
   switch (item) {
