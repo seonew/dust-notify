@@ -3,10 +3,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./GlobalRedux/store";
 import { setSidoName, update } from "./GlobalRedux/Features/list";
-import { SIDO_NAMES } from "@/utils/common";
 import CardList from "@/components/CardList";
 import useData from "./hooks/use-data";
 import { useEffect } from "react";
+import { EMPTY_DATA_MESSAGE, SIDO_NAMES } from "@/utils/constants";
 
 export default function Home() {
   const list = useSelector((state: RootState) => state.list.items);
@@ -44,10 +44,7 @@ export default function Home() {
               </select>
             </div>
             <div className="flex flex-col items-center m-auto">
-              <CardList
-                list={list}
-                emptyNode={<p>일시적으로 데이터를 불러올 수 없어요.</p>}
-              />
+              <CardList list={list} emptyNode={<p>{EMPTY_DATA_MESSAGE}</p>} />
             </div>
           </>
         )}
