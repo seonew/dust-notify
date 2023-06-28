@@ -6,8 +6,9 @@ import Card from "./Card";
 type CardListType = {
   list: any;
   emptyNode?: ReactNode;
+  isHidden?: boolean;
 };
-const CardList = ({ list, emptyNode }: CardListType) => {
+const CardList = ({ list, emptyNode, isHidden }: CardListType) => {
   return (
     <>
       {list?.length > 0
@@ -15,7 +16,7 @@ const CardList = ({ list, emptyNode }: CardListType) => {
           list?.map((item, index) => {
             return (
               <div key={index}>
-                <Card item={item} />
+                <Card item={item} isHidden={isHidden} />
               </div>
             );
           })

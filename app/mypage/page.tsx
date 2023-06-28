@@ -77,6 +77,7 @@ export default function Mypage() {
             <CardList
               list={list}
               emptyNode={<p className="m-auto">{EMPTY_DATA_MESSAGE}</p>}
+              isHidden={true}
             />
           </div>
         )}

@@ -11,9 +11,10 @@ import {
 
 type Props = {
   item: ItemState;
+  isHidden?: boolean;
 };
 
-const Card = ({ item }: Props) => {
+const Card = ({ item, isHidden = false }: Props) => {
   const dispatch = useDispatch();
 
   const handleClickItem = (checked) => {
@@ -43,7 +44,11 @@ const Card = ({ item }: Props) => {
           <span>{item.stationName}&nbsp;</span>
           <span className="text-xs">{item.sidoName}</span>
         </div>
-        <Favorite checked={item.isFavorite} onClick={handleClickItem} />
+        {isHidden ? (
+          ""
+        ) : (
+          <Favorite checked={item.isFavorite} onClick={handleClickItem} />
+        )}
       </div>
       <div>
         <span
