@@ -17,6 +17,7 @@ import {
   SIDO_NAMES,
   STATION_NAMES,
 } from "@/utils/constants";
+import Loading from "@/components/Loading";
 
 export default function Mypage() {
   const list = useSelector((state: RootState) => state.mypage.items);
@@ -66,22 +67,27 @@ export default function Mypage() {
   }, [data, dispatch, list]);
 
   return (
-    <div className={`${fixedCSS}`}>
-      <main className={`${flexCSS} w-screen`}>
-        {AreaSelectBox}
+    <>
+      {data.isLoading ? (
+        <>
+          <Loading />
+          <div className="loading-overlay"></div>
+        </>
+      ) : (
+        <div className={fixedCSS}>
+          <main className={`${flexCSS} w-screen`}>
+            {AreaSelectBox}
 
-        {data.isLoading ? (
-          <p className="m-auto">loading</p>
-        ) : (
-          <div className={`${flexCSS} overflow-y-auto`}>
-            <CardList
-              list={list}
-              emptyNode={<p className="m-auto">{EMPTY_DATA_MESSAGE}</p>}
-              isHidden={true}
-            />
-          </div>
-        )}
-      </main>
-    </div>
+            <div className={`${flexCSS} overflow-y-auto`}>
+              <CardList
+                list={list}
+                emptyNode={<p className="m-auto">{EMPTY_DATA_MESSAGE}</p>}
+                isHidden={true}
+              />
+            </div>
+          </main>
+        </div>
+      )}
+    </>
   );
 }

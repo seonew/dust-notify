@@ -13,7 +13,7 @@ const BottomTabs = () => {
 
   return (
     <div
-      className={`${fixedCSS} flex items-center justify-between h-16 text-sm bottom-0 z-50 bg-white divide-x shadow-2xl`}
+      className={`${fixedCSS} flex items-center justify-between h-16 text-sm bottom-0 z-10 bg-white divide-x shadow-2xl`}
     >
       <Link
         href="/mypage"

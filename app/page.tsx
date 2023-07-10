@@ -8,6 +8,7 @@ import useData from "./hooks/use-data";
 import { useEffect } from "react";
 import { EMPTY_DATA_MESSAGE, SIDO_NAMES } from "@/utils/constants";
 import SelectBox from "@/components/SelectBox";
+import Loading from "@/components/Loading";
 
 export default function Home() {
   const list = useSelector((state: RootState) => state.list.items);
@@ -29,12 +30,15 @@ export default function Home() {
   }, [data, dispatch, list]);
 
   return (
-    <div className={`${fixedCSS}`}>
-      <main className={`flex flex-col justify-center w-screen ${emptyCSS}`}>
-        {data.isLoading ? (
-          <p className="flex items-center justify-center">loading</p>
-        ) : (
-          <>
+    <>
+      {data.isLoading ? (
+        <>
+          <Loading />
+          <div className="loading-overlay"></div>
+        </>
+      ) : (
+        <div className={fixedCSS}>
+          <main className={`flex flex-col justify-center w-screen ${emptyCSS}`}>
             <div className="p-2 flex items-center justify-center w-full">
               <div className="w-2/4">
                 <SelectBox
@@ -47,9 +51,9 @@ export default function Home() {
             <div className="flex flex-col items-center m-auto">
               <CardList list={list} emptyNode={<p>{EMPTY_DATA_MESSAGE}</p>} />
             </div>
-          </>
-        )}
-      </main>
-    </div>
+          </main>
+        </div>
+      )}
+    </>
   );
 }
