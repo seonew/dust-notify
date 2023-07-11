@@ -1,16 +1,16 @@
 "use client";
 
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../GlobalRedux/store";
+import { RootState } from "@/lib/store";
 import CardList from "@/components/CardList";
-import useMyData from "../hooks/use-my-data";
+import useMyData from "@/hooks/use-my-data";
 import { useEffect } from "react";
 import {
   initializeSidoNameChange,
   setStationName,
   updateList,
   updateSidoNameChange,
-} from "../GlobalRedux/Features/mypage";
+} from "@/lib/redux/features/mypage";
 import SelectBox from "@/components/SelectBox";
 import {
   EMPTY_DATA_MESSAGE,
@@ -28,8 +28,6 @@ export default function Mypage() {
 
   const data = useMyData(sidoName, stationName);
   const dispatch = useDispatch();
-  const flexCSS = "flex flex-col items-center h-full";
-  const fixedCSS = "fixed left-0 top-0 right-0 bottom-16";
 
   const handleChangeSidoName = (item) => {
     dispatch(updateSidoNameChange(item));
@@ -60,6 +58,8 @@ export default function Mypage() {
     </div>
   );
 
+  const EmptyNode = <p className="m-auto">{EMPTY_DATA_MESSAGE}</p>;
+
   useEffect(() => {
     if (list === undefined || list?.length === 0) {
       dispatch(updateList(data));
@@ -74,16 +74,12 @@ export default function Mypage() {
           <div className="loading-overlay"></div>
         </>
       ) : (
-        <div className={fixedCSS}>
-          <main className={`${flexCSS} w-screen`}>
+        <div className="content-view">
+          <main className="flex-col-h-full items-center w-screen">
             {AreaSelectBox}
 
-            <div className={`${flexCSS} overflow-y-auto`}>
-              <CardList
-                list={list}
-                emptyNode={<p className="m-auto">{EMPTY_DATA_MESSAGE}</p>}
-                isHidden={true}
-              />
+            <div className="flex-col-h-full overflow-y-auto">
+              <CardList list={list} emptyNode={EmptyNode} isHidden={true} />
             </div>
           </main>
         </div>

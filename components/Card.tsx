@@ -1,13 +1,7 @@
-import {
-  ItemState,
-  addIsFavoriteToItem,
-} from "@/app/GlobalRedux/Features/list";
+import { ItemState, addIsFavoriteToItem } from "@/lib/redux/features/list";
 import { useDispatch } from "react-redux";
 import Favorite from "./Favorite";
-import {
-  addFavorite,
-  deleteFavorite,
-} from "@/app/GlobalRedux/Features/favorite";
+import { addFavorite, deleteFavorite } from "@/lib/redux/features/favorite";
 
 type Props = {
   item: ItemState;
@@ -69,9 +63,9 @@ const Card = ({ item, isHidden = false }: Props) => {
 
 export default Card;
 
-const getBackgroundColor = (item: string) => {
+const getBackgroundColor = (pm10Grade: string) => {
   let result = "";
-  switch (item) {
+  switch (pm10Grade) {
     case "1":
       result = "bg-blue-400";
       break;
@@ -95,9 +89,9 @@ const getBackgroundColor = (item: string) => {
   return result;
 };
 
-const getColorText = (item: string) => {
+const getColorText = (pm10Grade: string) => {
   let result = "";
-  switch (item) {
+  switch (pm10Grade) {
     case "1":
       result = "text-blue-400";
       break;
@@ -121,9 +115,9 @@ const getColorText = (item: string) => {
   return result;
 };
 
-const getBasicColorText = (item: string) => {
+const getBasicColorText = (pm10Grade: string) => {
   let result = "";
-  switch (item) {
+  switch (pm10Grade) {
     case null:
       result = "text-black";
       break;
@@ -135,9 +129,9 @@ const getBasicColorText = (item: string) => {
   return result;
 };
 
-const getGradeText = (item: string) => {
+const getGradeText = (pm10Grade: string) => {
   let result = "";
-  switch (item) {
+  switch (pm10Grade) {
     case "1":
       result = "좋음";
       break;

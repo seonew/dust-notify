@@ -33,3 +33,21 @@ body {
   justify-content: center;
   z-index: 40;
 }
+
+@layer components {
+  .bottom-tab {
+    @apply w-full h-full flex items-center justify-center;
+  }
+  .bottom-tab-icon {
+    @apply w-5 h-5 m-auto;
+  }
+  .bottom-tab-active {
+    @apply text-green-500 font-semibold;
+  }
+  .content-view {
+    @apply fixed left-0 top-0 right-0 bottom-16;
+  }
+  .flex-col-h-full {
+    @apply flex flex-col h-full;
+  }
+}

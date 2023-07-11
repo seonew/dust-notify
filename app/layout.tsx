@@ -1,6 +1,6 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
-import { Providers } from "./GlobalRedux/provider";
+import { Providers } from "@/lib/provider";
 import BottomTabs from "@/components/BottomTabs";
 
 const inter = Inter({ subsets: ["latin"] });

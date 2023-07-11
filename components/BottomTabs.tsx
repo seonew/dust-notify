@@ -5,9 +5,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const BottomTabs = () => {
-  const tabCSS = "w-full h-full flex items-center justify-center";
-  const iconCSS = "w-5 h-5 m-auto";
-  const activeCSS = "text-green-500 font-semibold";
   const fixedCSS = "fixed w-full left-0";
   const pathname = usePathname();
 
@@ -17,28 +14,32 @@ const BottomTabs = () => {
     >
       <Link
         href="/mypage"
-        className={`${tabCSS} ${"/mypage" === pathname ? activeCSS : ""}`}
+        className={`bottom-tab ${
+          "/mypage" === pathname ? "bottom-tab-active" : ""
+        }`}
       >
         <div>
-          <MapPinIcon className={`${iconCSS}`} />
+          <MapPinIcon className="bottom-tab-icon" />
           <span>나의 지역</span>
         </div>
       </Link>
       <Link
         href="/"
-        className={`${tabCSS} ${"/" === pathname ? activeCSS : ""}`}
+        className={`bottom-tab ${"/" === pathname ? "bottom-tab-active" : ""}`}
       >
         <div>
-          <MapIcon className={`${iconCSS}`} />
+          <MapIcon className="bottom-tab-icon" />
           <span>전체 지역</span>
         </div>
       </Link>
       <Link
         href="/favorites"
-        className={`${tabCSS} ${"/favorites" === pathname ? activeCSS : ""}`}
+        className={`bottom-tab ${
+          "/favorites" === pathname ? "bottom-tab-active" : ""
+        }`}
       >
         <div>
-          <StarIcon className={`${iconCSS}`} />
+          <StarIcon className="bottom-tab-icon" />
           <span>즐겨찾기</span>
         </div>
       </Link>

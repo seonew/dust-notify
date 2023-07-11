@@ -8,19 +8,13 @@ const useMyData = (sidoName: string, stationName: string) => {
     fetcher
   );
 
-  let result: [] | undefined = [];
-  if (data && data?.items.length > 0) {
-    result = data?.items.map((item) => {
-      return { ...item, sidoName, stationName };
-    });
-  }
-
-  if (result?.length === 0) {
-    result = undefined;
-  }
+  const nextList =
+    data?.items?.length > 0
+      ? data.items.map((item) => ({ ...item, sidoName, stationName }))
+      : undefined;
 
   return {
-    list: result,
+    list: nextList,
     isLoading,
     isError: error,
   };

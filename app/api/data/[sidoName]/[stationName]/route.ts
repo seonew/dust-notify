@@ -21,19 +21,14 @@ export async function GET(request: Request, context: { params }) {
   )}`;
 
   try {
-    const result = await fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        return data.response.body;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    const response = await fetch(url);
+    const data = await response.json();
+    const result = await data.response.body;
 
     return NextResponse.json(result);
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
   }
 
-  return NextResponse.json(null);
+  return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
 }

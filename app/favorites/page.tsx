@@ -1,18 +1,16 @@
 "use client";
 
 import { useSelector } from "react-redux";
-import { RootState } from "../GlobalRedux/store";
+import { RootState } from "@/lib/store";
 import CardList from "@/components/CardList";
 
 export default function Favorites() {
   const list = useSelector((state: RootState) => state.favorite.items);
-  const flexCSS = "flex flex-col h-full";
-  const fixedCSS = "fixed left-0 top-0 right-0 bottom-16";
 
   return (
-    <div className={`${fixedCSS}`}>
-      <main className={`${flexCSS} w-screen`}>
-        <div className={`${flexCSS} items-center overflow-y-auto`}>
+    <div className="content-view">
+      <main className="flex-col-h-full w-screen">
+        <div className="flex-col-h-full items-center overflow-y-auto">
           <CardList
             list={list}
             emptyNode={
