@@ -1,12 +1,13 @@
 "use client";
 
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import clsx from "clsx";
 import { RootState } from "@/lib/store";
 import { setSidoName, update } from "@/lib/redux/features/list";
-import CardList from "@/components/CardList";
 import useData from "@/hooks/use-data";
-import { useEffect } from "react";
 import { EMPTY_DATA_MESSAGE, SIDO_NAMES } from "@/utils/constants";
+import CardList from "@/components/CardList";
 import SelectBox from "@/components/SelectBox";
 import Loading from "@/components/Loading";
 
@@ -15,7 +16,6 @@ export default function Home() {
   const sidoName = useSelector((state: RootState) => state.list.sidoName);
   const dispatch = useDispatch();
   const data = useData(sidoName);
-  const emptyCSS = list === undefined ? "h-full" : "";
 
   const handleChangeItem = (item: string) => {
     dispatch(setSidoName(item));
@@ -28,6 +28,8 @@ export default function Home() {
     }
   }, [data, dispatch, list]);
 
+  const EmptyNode = <p className="m-auto">{EMPTY_DATA_MESSAGE}</p>;
+
   return (
     <>
       {data.isLoading ? (
@@ -36,8 +38,8 @@ export default function Home() {
           <div className="loading-overlay"></div>
         </>
       ) : (
-        <div className="content-view overflow-auto">
-          <main className={`flex flex-col justify-center w-screen ${emptyCSS}`}>
+        <div className="content-view">
+          <main className={clsx("h-full-w-screen")}>
             <div className="p-2 flex items-center justify-center w-full">
               <div className="w-2/4">
                 <SelectBox
@@ -47,8 +49,8 @@ export default function Home() {
                 />
               </div>
             </div>
-            <div className="flex flex-col items-center m-auto">
-              <CardList list={list} emptyNode={<p>{EMPTY_DATA_MESSAGE}</p>} />
+            <div className="h-full-w-screen overflow-y-auto">
+              <CardList items={list} emptyNode={EmptyNode} />
             </div>
           </main>
         </div>

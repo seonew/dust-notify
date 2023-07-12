@@ -3,12 +3,12 @@ import { StarIcon as CheckedStarIcon } from "@heroicons/react/24/solid";
 
 type Props = {
   checked?: boolean;
-  onClick: (item: boolean) => void;
+  onChange?: (item: boolean) => void;
 };
 
-const Favorite = ({ checked = false, onClick }: Props) => {
+const Favorite = ({ checked = false, onChange }: Props) => {
   const handleClickItem = () => {
-    onClick(!checked);
+    onChange?.(!checked);
   };
 
   return (

@@ -1,22 +1,22 @@
 "use client";
 
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/lib/store";
-import CardList from "@/components/CardList";
 import useMyData from "@/hooks/use-my-data";
-import { useEffect } from "react";
 import {
   initializeSidoNameChange,
   setStationName,
   updateList,
   updateSidoNameChange,
 } from "@/lib/redux/features/mypage";
-import SelectBox from "@/components/SelectBox";
 import {
   EMPTY_DATA_MESSAGE,
   SIDO_NAMES,
   STATION_NAMES,
 } from "@/utils/constants";
+import CardList from "@/components/CardList";
+import SelectBox from "@/components/SelectBox";
 import Loading from "@/components/Loading";
 
 export default function Mypage() {
@@ -75,11 +75,11 @@ export default function Mypage() {
         </>
       ) : (
         <div className="content-view">
-          <main className="flex-col-h-full items-center w-screen">
+          <main className="h-full-w-screen">
             {AreaSelectBox}
 
-            <div className="flex-col-h-full overflow-y-auto">
-              <CardList list={list} emptyNode={EmptyNode} isHidden={true} />
+            <div className="h-full-w-screen overflow-y-auto">
+              <CardList items={list} emptyNode={EmptyNode} isHidden={true} />
             </div>
           </main>
         </div>

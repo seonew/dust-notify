@@ -1,3 +1,31 @@
+export const BACKGROUND_COLOR_BY_PM10GRADE = {
+  1: "bg-blue-400",
+  2: "bg-yellow-400",
+  3: "bg-orange-400",
+  4: "bg-red-500",
+  5: "bg-black",
+};
+
+export const TEXT_COLOR_BY_PM10GRADE = {
+  1: "text-blue-400",
+  2: "text-yellow-400",
+  3: "text-orange-400",
+  4: "text-red-500",
+  5: "text-black",
+};
+
+export const BASIC_TEXT_COLOR_BY_PM10GRADE = {
+  null: "text-black",
+};
+
+export const GRADE_TEXT_BY_PM10GRADE = {
+  1: "좋음",
+  2: "보통",
+  3: "한 때 나쁨",
+  4: "나쁨",
+  5: "매우 나쁨",
+};
+
 export const EMPTY_DATA_MESSAGE = "일시적으로 데이터를 불러올 수 없어요.";
 
 export const SIDO_NAMES = [

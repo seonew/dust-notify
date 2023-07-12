@@ -1,7 +1,14 @@
-import { ItemState, addIsFavoriteToItem } from "@/lib/redux/features/list";
 import { useDispatch } from "react-redux";
+import clsx from "clsx";
 import Favorite from "./Favorite";
+import { ItemState, addIsFavoriteToItem } from "@/lib/redux/features/list";
 import { addFavorite, deleteFavorite } from "@/lib/redux/features/favorite";
+import {
+  BACKGROUND_COLOR_BY_PM10GRADE,
+  BASIC_TEXT_COLOR_BY_PM10GRADE,
+  GRADE_TEXT_BY_PM10GRADE,
+  TEXT_COLOR_BY_PM10GRADE,
+} from "@/utils/constants";
 
 type Props = {
   item: ItemState;
@@ -29,33 +36,35 @@ const Card = ({ item, isHidden = false }: Props) => {
 
   return (
     <div
-      className={`flex flex-col items-center justify-between p-1 m-2 w-80 h-32 text-center rounded-md ${getBasicColorText(
-        item.pm10Grade
-      )} ${getBackgroundColor(item.pm10Grade)}`}
+      className={clsx(
+        "flex flex-col items-center justify-between",
+        "p-1 m-2 w-80 h-32 text-center rounded-md",
+        getBasicColorText(item.pm10Grade),
+        getBackgroundColor(item.pm10Grade)
+      )}
     >
       <div className="flex items-center justify-between w-full px-1">
         <div className="p-1 text-base">
           <span>{item.stationName}&nbsp;</span>
           <span className="text-xs">{item.sidoName}</span>
         </div>
-        {isHidden ? (
-          ""
-        ) : (
-          <Favorite checked={item.isFavorite} onClick={handleClickItem} />
+        {!isHidden && (
+          <Favorite checked={item.isFavorite} onChange={handleClickItem} />
         )}
       </div>
       <div>
         <span
-          className={`text-3xl rounded p-1 bg-white ${getColorText(
-            item.pm10Grade
-          )}`}
+          className={clsx(
+            "text-3xl rounded p-1 bg-white",
+            getColorText(item.pm10Grade)
+          )}
         >
           {getGradeText(item.pm10Grade)}
         </span>
       </div>
       <div className="p-1 text-xs">
         <p>미세먼지 수치: {item.pm10Value ?? "-"}</p>
-        {item.dataTime ? <p>({item.dataTime} 기준)</p> : ""}
+        {item.dataTime && <p>({item.dataTime} 기준)</p>}
       </div>
     </div>
   );
@@ -64,93 +73,17 @@ const Card = ({ item, isHidden = false }: Props) => {
 export default Card;
 
 const getBackgroundColor = (pm10Grade: string) => {
-  let result = "";
-  switch (pm10Grade) {
-    case "1":
-      result = "bg-blue-400";
-      break;
-    case "2":
-      result = "bg-yellow-400";
-      break;
-    case "3":
-      result = "bg-orange-400";
-      break;
-    case "4":
-      result = "bg-red-500";
-      break;
-    case "5":
-      result = "bg-black";
-      break;
-    default:
-      result = "bg-white";
-      break;
-  }
-
-  return result;
+  return BACKGROUND_COLOR_BY_PM10GRADE[pm10Grade] ?? "bg-white";
 };
 
 const getColorText = (pm10Grade: string) => {
-  let result = "";
-  switch (pm10Grade) {
-    case "1":
-      result = "text-blue-400";
-      break;
-    case "2":
-      result = "text-yellow-400";
-      break;
-    case "3":
-      result = "text-orange-400";
-      break;
-    case "4":
-      result = "text-red-500";
-      break;
-    case "5":
-      result = "text-black";
-      break;
-    default:
-      result = "text-black";
-      break;
-  }
-
-  return result;
+  return TEXT_COLOR_BY_PM10GRADE[pm10Grade] ?? "text-black";
 };
 
 const getBasicColorText = (pm10Grade: string) => {
-  let result = "";
-  switch (pm10Grade) {
-    case null:
-      result = "text-black";
-      break;
-    default:
-      result = "text-white";
-      break;
-  }
-
-  return result;
+  return BASIC_TEXT_COLOR_BY_PM10GRADE[pm10Grade] ?? "text-white";
 };
 
 const getGradeText = (pm10Grade: string) => {
-  let result = "";
-  switch (pm10Grade) {
-    case "1":
-      result = "좋음";
-      break;
-    case "2":
-      result = "보통";
-      break;
-    case "3":
-      result = "한 때 나쁨";
-      break;
-    case "4":
-      result = "나쁨";
-      break;
-    case "5":
-      result = "매우 나쁨";
-      break;
-    default:
-      result = "알 수 없음";
-      break;
-  }
-
-  return result;
+  return GRADE_TEXT_BY_PM10GRADE[pm10Grade] ?? "알 수 없음";
 };

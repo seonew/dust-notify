@@ -2,20 +2,22 @@
 
 import React, { ReactNode } from "react";
 import Card from "./Card";
+import { FavoriteState } from "@/lib/redux/features/favorite";
+import { ItemState } from "@/lib/redux/features/list";
 
 type CardListType = {
-  list: any;
+  items: FavoriteState[] | ItemState[];
   emptyNode?: ReactNode;
   isHidden?: boolean;
 };
-const CardList = ({ list, emptyNode, isHidden }: CardListType) => {
+const CardList = ({ items, emptyNode, isHidden }: CardListType) => {
   return (
     <>
-      {list?.length > 0
-        ? list &&
-          list?.map((item, index) => {
+      {items?.length > 0
+        ? items &&
+          items?.map((item) => {
             return (
-              <div key={index}>
+              <div key={`${item.sidoName}_${item.stationName}`}>
                 <Card item={item} isHidden={isHidden} />
               </div>
             );

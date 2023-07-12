@@ -9,10 +9,10 @@ export default function Favorites() {
 
   return (
     <div className="content-view">
-      <main className="flex-col-h-full w-screen">
-        <div className="flex-col-h-full items-center overflow-y-auto">
+      <main className="h-full-w-screen">
+        <div className="h-full-w-screen">
           <CardList
-            list={list}
+            items={list}
             emptyNode={
               <p className="m-auto">즐겨찾기 지역을 추가해 주세요. 😊</p>
             }

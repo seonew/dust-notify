@@ -1,3 +1,10 @@
+import {
+  BACKGROUND_COLOR_BY_PM10GRADE,
+  BASIC_TEXT_COLOR_BY_PM10GRADE,
+  GRADE_TEXT_BY_PM10GRADE,
+  TEXT_COLOR_BY_PM10GRADE,
+} from "@/utils/constants";
+
 export const objectToQueryString = (params) => {
   const queryStrings = Object.keys(params).map((key) => {
     const value = params[key];
@@ -11,94 +18,18 @@ export const objectToQueryString = (params) => {
   return queryStrings.join("&");
 };
 
-export const getBackgroundColor = (item: string) => {
-  let result = "";
-  switch (item) {
-    case "1":
-      result = "bg-blue-400";
-      break;
-    case "2":
-      result = "bg-yellow-400";
-      break;
-    case "3":
-      result = "bg-orange-400";
-      break;
-    case "4":
-      result = "bg-red-500";
-      break;
-    case "5":
-      result = "bg-black";
-      break;
-    default:
-      result = "bg-white";
-      break;
-  }
-
-  return result;
+export const getBackgroundColor = (pm10Grade: string) => {
+  return BACKGROUND_COLOR_BY_PM10GRADE[pm10Grade] ?? "bg-white";
 };
 
-export const getColorText = (item: string) => {
-  let result = "";
-  switch (item) {
-    case "1":
-      result = "text-blue-400";
-      break;
-    case "2":
-      result = "text-yellow-400";
-      break;
-    case "3":
-      result = "text-orange-400";
-      break;
-    case "4":
-      result = "text-red-500";
-      break;
-    case "5":
-      result = "text-black";
-      break;
-    default:
-      result = "text-black";
-      break;
-  }
-
-  return result;
+export const getColorText = (pm10Grade: string) => {
+  return TEXT_COLOR_BY_PM10GRADE[pm10Grade] ?? "text-black";
 };
 
-export const getBasicColorText = (item: string) => {
-  let result = "";
-  switch (item) {
-    case null:
-      result = "text-black";
-      break;
-    default:
-      result = "text-white";
-      break;
-  }
-
-  return result;
+export const getBasicColorText = (pm10Grade: string) => {
+  return BASIC_TEXT_COLOR_BY_PM10GRADE[pm10Grade] ?? "text-white";
 };
 
-export const getGradeText = (item: string) => {
-  let result = "";
-  switch (item) {
-    case "1":
-      result = "좋음";
-      break;
-    case "2":
-      result = "보통";
-      break;
-    case "3":
-      result = "한 때 나쁨";
-      break;
-    case "4":
-      result = "나쁨";
-      break;
-    case "5":
-      result = "매우 나쁨";
-      break;
-    default:
-      result = "알 수 없음";
-      break;
-  }
-
-  return result;
+export const getGradeText = (pm10Grade: string) => {
+  return GRADE_TEXT_BY_PM10GRADE[pm10Grade] ?? "알 수 없음";
 };
